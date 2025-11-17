@@ -1,28 +1,105 @@
-import { useState } from 'react'
+import React, { useEffect } from 'react'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import LoaderGate from './components/LoaderGate'
+import Home from './components/Home'
+import Services from './components/Services'
+import Pricing from './components/Pricing'
+import Themes from './components/Themes'
+import AIDashboard from './components/AIDashboard'
+import SVXSLoader from './components/SVXSLoader'
+import SVXSDashboard from './components/SVXSDashboard'
+import SVXSWorkspace from './components/SVXSWorkspace'
+import { ThemeProvider } from './components/ThemeContext'
+import './index.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
 }
 
-export default App
+export default function App() {
+  return (
+    <ThemeProvider>
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<LoaderGate />} />
+          <Route
+            path="/home"
+            element={
+              <>
+                <Navbar />
+                <Home />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <>
+                <Navbar />
+                <Services />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/pricing"
+            element={
+              <>
+                <Navbar />
+                <Pricing />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/themes"
+            element={
+              <>
+                <Navbar />
+                <Themes />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/ai"
+            element={
+              <>
+                <Navbar />
+                <AIDashboard />
+              </>
+            }
+          />
+          <Route path="/svxs" element={<SVXSLoader />} />
+          <Route
+            path="/svxs/dashboard"
+            element={
+              <>
+                <Navbar />
+                <SVXSDashboard />
+              </>
+            }
+          />
+          <Route
+            path="/svxs/workspace"
+            element={
+              <>
+                <Navbar />
+                <SVXSWorkspace />
+              </>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
+  )
+}

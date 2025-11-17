@@ -1,0 +1,34 @@
+/* Theme tokens for Black, White, Neon Blue */
+:root.theme-black{
+  --background: #05070b;
+  --foreground: #e6eef6;
+  --primary: #22d3ee;
+  --muted: #8aa0b3;
+  --popover: rgba(8,12,20,0.7);
+}
+:root.theme-white{
+  --background: #f7fafc;
+  --foreground: #0b1220;
+  --primary: #2563eb;
+  --muted: #5b6b7d;
+  --popover: rgba(255,255,255,0.8);
+}
+:root.theme-neon{
+  --background: #04060a;
+  --foreground: #e8faff;
+  --primary: #38bdf8; /* neon blue */
+  --muted: #8ac7dd;
+  --popover: rgba(10,17,26,0.7);
+}
+
+/* CSS vars to Tailwind via utility classes */
+.bg-background{ background-color: var(--background); }
+.text-foreground{ color: var(--foreground); }
+.text-muted-foreground{ color: var(--muted); }
+.bg-popover{ background-color: var(--popover); }
+.text-popover-foreground{ color: var(--foreground); }
+.text-primary{ color: var(--primary); }
+.bg-primary\/20{ background-color: color-mix(in oklab, var(--primary) 20%, transparent); }
+.bg-primary\/30{ background-color: color-mix(in oklab, var(--primary) 30%, transparent); }
+.border-primary\/40{ border-color: color-mix(in oklab, var(--primary) 40%, transparent); }
+.border-primary\/50{ border-color: color-mix(in oklab, var(--primary) 50%, transparent); }
